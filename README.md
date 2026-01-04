@@ -1,3 +1,8 @@
+Live Demo: View the Dashboard Here
+
+<img width="1619" height="669" alt="image" src="https://github.com/user-attachments/assets/d1265d6e-3f48-4d52-a7d2-3cb5b2d8a73e" />
+
+
 NYC Taxi Analytics Platform : 
 
 This project is a comprehensive data engineering and analytics solution designed to process and analyze large-scale urban transportation data. Using the New York City Taxi & Limousine Commission (TLC) dataset, I built a system that transforms millions of raw trip records into a dynamic dashboard providing actionable insights into city wide revenue and passenger behavior.
