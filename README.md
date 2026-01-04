@@ -1,4 +1,5 @@
-Live Demo: View the Dashboard Here
+
+Live Demo: [View the Dashboard Here](https://nyc-taxi-analytics-platform-y2jdmffmvz6wkpjzdtscbu.streamlit.app/)
 
 <img width="1619" height="669" alt="image" src="https://github.com/user-attachments/assets/d1265d6e-3f48-4d52-a7d2-3cb5b2d8a73e" />
 
