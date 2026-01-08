@@ -37,7 +37,7 @@ safe_borough = borough_filter.replace("'", "''")
 
 base_borough_sql = """
     SELECT borough, total_revenue, trip_count
-    FROM NYC_TAXI_DB.ANALYTICS.HIGH_TIP_BOROUGH_STATS
+    FROM NYC_TAXI_DB.ANALYTICS.BOROUGH_REVENUE_STATS_GOLD
 """
 
 if borough_filter != "All":
@@ -137,3 +137,22 @@ with right:
 st.divider()
 st.subheader("Borough Stats (Table)")
 st.dataframe(df, use_container_width=True)
+
+
+st.subheader("Revenue by Trip Type")
+
+# Query the new view
+type_df = conn.query("SELECT * FROM NYC_TAXI_DB.ANALYTICS.TRIP_TYPE_STATS")
+type_df.columns = [c.lower() for c in type_df.columns]
+
+# Create a layout with a chart 
+c1, c2 = st.columns([1.5, 1])
+
+with c1:
+    # A horizontal bar chart 
+    st.bar_chart(type_df.set_index("trip_type")["total_revenue"])
+
+with c2:
+    # Show the average tip per trip type"
+    st.write("Top Tipping Trip Types")
+    st.dataframe(type_df[["trip_type", "avg_tip"]].sort_values("avg_tip", ascending=False))
