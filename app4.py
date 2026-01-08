@@ -156,3 +156,27 @@ with c2:
     # Show the average tip per trip type"
     st.write("Top Tipping Trip Types")
     st.dataframe(type_df[["trip_type", "avg_tip"]].sort_values("avg_tip", ascending=False))
+
+
+
+    st.divider()
+
+# Weather Analysis 
+st.subheader("External Factor Analysis: Weather")
+try:
+    weather_df = conn.query("SELECT * FROM NYC_TAXI_DB.ANALYTICS.WEATHER_IMPACT")
+    weather_df.columns = [c.lower() for c in weather_df.columns]
+    st.bar_chart(weather_df.set_index("condition")["avg_tip"])
+except Exception:
+    st.info("Weather data is currently being processed in Snowflake.")
+
+# Data Quality and Governance
+with st.expander("🛠️ Data Quality & Governance Report"):
+    try:
+        dq_df = conn.query("SELECT * FROM NYC_TAXI_DB.ANALYTICS.DATA_QUALITY_METRICS")
+        dq_df.columns = [c.lower() for c in dq_df.columns]
+        q1, q2 = st.columns(2)
+        q1.metric("Total Records", f"{dq_df['total_rows'][0]:,}")
+        q2.metric("Anomalies", dq_df['suspicious_trips'][0], delta="Audit Required", delta_color="inverse")
+    except Exception:
+        st.write("Quality metrics unavailable.")
